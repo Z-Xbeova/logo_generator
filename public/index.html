@@ -1,0 +1,125 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Logo Generator</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+		<script type="module" src="./app.js"></script>
+		<style type="text/css">
+			body {background-image: linear-gradient(to right, #004000, #002020, #004000); color: white;}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<center>
+				<h1>Logo generator</h1>
+			</center>
+			<hr/>
+			<div class="row">
+				<div class="col-xs-8 col-sm-8 col-md-8">
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<label class="input-group-text" for="prompt">prompt:</label>
+						</div>
+						<input type="text" class="form-control" id="prompt" placeholder="your text prompt"/>
+						<div class="input-group-append">
+							<button class="btn btn-success" id="run" onclick="run()">run</button>
+						</div>
+					</div>
+					<p>
+						<button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#optional_params">optional parameters</button>
+					</p>
+					<div id="optional_params" class="collapse">
+						<div class="panel-body">
+							<div class="input-group mb-3">
+								<div class="input-group-prepend">
+									<label class="input-group-text" for="negative">negative:</label>
+								</div>
+								<input type="text" class="form-control" id="negative" placeholder="what to discard from output"/>
+							</div>
+							<div class="row">
+								<div class="col-xs-6 col-sm-6 col-md-6 mb-3">
+									<label for="init_image" class="formLabel">initial image:</label>
+									<input type="file" class="form-control" id="init_image"/>
+								</div>
+								<div class="col-xs-6 col-sm-6 col-md-6 mb-3">
+									<label for="mask" class="formLabel">mask:</label>
+									<input type="file" class="form-control" id="mask"/>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div id="output">
+						(images)
+					</div>
+				</div>
+				<div class="col-xs-4 col-sm-4 col-md-4">
+					<form>
+						<div class="row mb-3">
+							<label for="guidance_scale" class="col-sm-6 col-form-label">guidance scale: </label>
+							<div class="col-sm-6">
+								<input type="number" class="form-control" id="guidance_scale" min="-20" max="100" value="5">
+							</div>
+						</div>
+						<div class="row mb-3">
+							<label for="steps" class="col-sm-6 col-form-label">steps: </label>
+							<div class="col-sm-6">
+								<input type="number" class="form-control" id="steps" min="15" max="250" value="100">
+							</div>
+						</div>
+						<div class="row mb-3">
+							<label for="batch_size" class="col-sm-6 col-form-label">batch size: </label>
+							<div class="col-sm-6">
+								<input type="number" class="form-control" id="batch_size" min="1" max="16" value="6">
+							</div>
+						</div>
+						<div class="row mb-3">
+							<label for="width" class="col-sm-6 col-form-label">width: </label>
+							<div class="col-sm-6">
+								<input type="number" class="form-control" id="width" min="128" max="384" value="256" step="64">
+							</div>
+						</div>
+						<div class="row mb-3">
+							<label for="height" class="col-sm-6 col-form-label">height: </label>
+							<div class="col-sm-6">
+								<input type="number" class="form-control" id="height" min="128" max="384" value="256" step="64">
+							</div>
+						</div>
+						<div class="row mb-3">
+							<label for="init_skip_fraction" class="col-sm-6 col-form-label">initial skip fraction (%): </label>
+							<div class="col-sm-6">
+								<input type="number" class="form-control" id="init_skip_fraction" min="0" max="100" value="50">
+							</div>
+						</div>
+						<div class="row mb-3">
+							<label for="aesthetic_rating" class="col-sm-6 col-form-label">aesthetic rating: </label>
+							<div class="col-sm-6">
+								<input type="number" class="form-control" id="aesthetic_rating" min="1" max="9" value="9">
+							</div>
+						</div>
+						<div class="row mb-3">
+							<label for="aesthetic_weight" class="col-sm-6 col-form-label">aesthetic weight (%): </label>
+							<div class="col-sm-6">
+								<input type="number" class="form-control" id="aesthetic_weight" min="0" max="100" value="50">
+							</div>
+						</div>
+						<div class="row mb-3">
+							<label for="seed" class="col-sm-6 col-form-label">seed: </label>
+							<div class="col-sm-6">
+								<input type="number" class="form-control" id="seed" min="-1" max="4294967295" value="-1">
+							</div>
+						</div>
+						<div class="row mb-3">
+							<label for="intermediate_outputs" class="col-sm-6 form-check-label">intermediate outputs: </label>
+							<div class="col-sm-6">
+								<input type="checkbox" class="form-check-input" id="intermediate_outputs">
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
